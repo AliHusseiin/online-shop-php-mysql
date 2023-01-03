@@ -1,6 +1,7 @@
 
 <?php
-require('./layout/header.php');
+require_once('./layout/header.php');
+require_once('./logic/products.php');
 
 $categories = [
     ['id' => 1, 'name' => 'cat1', 'image' => 'img/cat-1.jpg'],
@@ -8,17 +9,8 @@ $categories = [
     ['id' => 3, 'name' => 'cat3', 'image' => 'img/cat-3.jpg'],
     ['id' => 4, 'name' => 'cat4', 'image' => 'img/cat-4.jpg'],
 ];
-$products = [
-    ['id' => 1, 'name' => 'product-1', 'price' => 123, 'discount' => 0.1, 'rating' => 3, 'is_featured' => true, 'rating_count' => 100, 'is_recent' => false, 'image' => 'img/product-1.jpg'],
-    ['id' => 2, 'name' => 'product-2', 'price' => 100, 'discount' => 0.1, 'rating' => 4.5, 'is_featured' => true, 'rating_count' => 100, 'is_recent' => false, 'image' => 'img/product-2.jpg'],
-    ['id' => 3, 'name' => 'product-3', 'price' => 200, 'discount' => 0.1, 'rating' => 5, 'is_featured' => false, 'rating_count' => 100, 'is_recent' => true, 'image' => 'img/product-3.jpg'],
-    ['id' => 4, 'name' => 'product-4', 'price' => 500, 'discount' => 0.1, 'rating' => 2, 'is_featured' => true, 'rating_count' => 100, 'is_recent' => false, 'image' => 'img/product-4.jpg'],
-    ['id' => 5, 'name' => 'product-5', 'price' => 100, 'discount' => 0.1, 'rating' => 3.5, 'is_featured' => false, 'rating_count' => 100, 'is_recent' => true, 'image' => 'img/product-5.jpg'],
-    ['id' => 6, 'name' => 'product-6', 'price' => 300, 'discount' => 0.1, 'rating' => 5, 'is_featured' => false, 'rating_count' => 100, 'is_recent' => true, 'image' => 'img/product-6.jpg'],
-    ['id' => 7, 'name' => 'product-7', 'price' => 160, 'discount' => 0.1, 'rating' => 2, 'is_featured' => false, 'rating_count' => 100, 'is_recent' => true, 'image' => 'img/product-7.jpg'],
-    ['id' => 8, 'name' => 'product-8', 'price' => 400, 'discount' => 0.1, 'rating' => 2.5, 'is_featured' => true, 'rating_count' => 100, 'is_recent' => false, 'image' => 'img/product-8.jpg'],
+$products = getProducts();
 
-];
 ?>
     <!-- Carousel Start -->
     <div class="container-fluid mb-3">
@@ -263,7 +255,7 @@ $products = [
             </div>
             <div class="text-center py-4">
               <a class="h6 text-decoration-none text-truncate" href=""
-                >Product Name Goes Here</a
+                ><?= $product['name'] ?></a
               >
               <div
                 class="d-flex align-items-center justify-content-center mt-2"
@@ -349,7 +341,7 @@ $products = [
             </div>
             <div class="text-center py-4">
               <a class="h6 text-decoration-none text-truncate" href=""
-                >Product Name Goes Here</a
+                ><?= $product['name'] ?></a
               >
               <div
                 class="d-flex align-items-center justify-content-center mt-2"
@@ -410,7 +402,7 @@ $products = [
     <!-- Vendor End -->
 
     <?php
-    require('./layout/footer.php')
+    require_once('./layout/footer.php')
     ?>
 
     <!-- Back to Top -->
