@@ -1,28 +1,12 @@
 <?php
+require_once(BASE_PATH.'dal/dal.php');
+
 function getProducts()
 {
-  $products = [];
-  $file = fopen('./data/products.csv', 'r') or die();
-  while (!feof($file)) {
-    $line = fgets($file);
-    $arr = explode(',', $line);
-    $sProduct = [
-      'id' => $arr[0],
-      'name' => $arr[1],
-      'price' => (float) $arr[2],
-      'discount' => (float) $arr[3],
-      'rating' => (float) $arr[4],
-      'is_featured' => $arr[5] == 'true' ? true : false,
-      'rating_count' => (int) $arr[6],
-      'image' => $arr[7],
-      'is_recent' => trim($arr[8]) == 'true' ? true : false
-
-    ];
-    array_push($products, $sProduct);
-
-    
-  }
-  fclose($file);
-  return $products;
-  
+  $query = "SELECT p.*,c.name category_name,s.name size_name,cl.name color_name,r.rating,r.rating_count FROM 
+    products p JOIN categories c ON p.category_id=c.id
+    JOIN sizes s on s.id = p.size_id
+    JOIN colors cl on cl.id = p.color_id
+	LEFT JOIN (SELECT product_id,AVG(rate) rating,COUNT(0) rating_count FROM `ratings` GROUP BY product_id) r ON r.product_id = p.id";
+  return getData($query);
 }

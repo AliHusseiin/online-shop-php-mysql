@@ -1,5 +1,6 @@
 
 <?php
+define('BASE_PATH', './');
 require_once('./layout/header.php');
 require_once('./logic/products.php');
 require_once('./logic/categories.php');
@@ -200,11 +201,11 @@ $products = getProducts();
           <a class="text-decoration-none" href="">
             <div class="cat-item d-flex align-items-center mb-4">
               <div class="overflow-hidden" style="width: 100px; height: 100px">
-                <img class="img-fluid" src="<?= $Category['image'] ?>" alt="" />
+                <img class="img-fluid" src="<?= $Category['image_url'] ?>" alt="" />
               </div>
               <div class="flex-fill pl-3">
                 <h6><?= $Category['name'] ?></h6>
-                <small class="text-body">100 Products</small>
+                <small class="text-body"><?= $Category['product_count'] ?></small>
               </div>
             </div>
           </a>
@@ -225,17 +226,18 @@ $products = getProducts();
       <div class="row px-xl-5">
     <?php 
     foreach($products as $product){
-      if(!$product['is_recent']){
+      if (!$product['is_featured']) {
+        continue;
+      }
       ?>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
           <div class="product-item bg-light mb-4">
             <div class="product-img position-relative overflow-hidden">
-              <img class="img-fluid w-100" src="<?= $product['image'] ?>" alt="" />
+              <img class="img-fluid w-100" src="<?= $product['image_url'] ?>" alt="" />
               <div class="product-action">
                 <a
                   class="btn btn-outline-dark btn-square"
                   href="#"
-                  onclick="addSingleProductToCart({id:1,name:'product-1',price:123,image:'/img/product-1.jpg'})"
                   ><i class="fa fa-shopping-cart"></i
                 ></a>
                 <a class="btn btn-outline-dark btn-square" href="#"
@@ -271,7 +273,7 @@ $products = getProducts();
           </div>
         </div>
         <?php
-    }}?>
+    }?>
     
     
     <!-- Products End -->
@@ -311,17 +313,19 @@ $products = getProducts();
       <div class="row px-xl-5">
           <?php 
     foreach($products as $product){
-            if (!$product['is_featured']) {
+            if (!$product['is_recent']) {
+              continue;
+            }
+
               ?>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
           <div class="product-item bg-light mb-4">
             <div class="product-img position-relative overflow-hidden">
-              <img class="img-fluid w-100" src="<?= $product['image'] ?>" alt="" />
+              <img class="img-fluid w-100" src="<?= $product['image_url'] ?>" alt="" />
               <div class="product-action">
                 <a
                   class="btn btn-outline-dark btn-square"
                   href="#"
-                  onclick="addSingleProductToCart({id:1,name:'product-1',price:123,image:'/img/product-1.jpg'})"
                   ><i class="fa fa-shopping-cart"></i
                 ></a>
                 <a class="btn btn-outline-dark btn-square" href="#"
@@ -356,7 +360,7 @@ $products = getProducts();
           </div>
         </div>
         <?php
-            }}?>
+            }?>
        
       </div>
     </div>
