@@ -43,7 +43,7 @@ $products = getProducts();
                                 <tr>
                                     <td><?= $product['id'] ?></td>
                                     <td><?= $product['name'] ?></td>
-                                    <td><img src="../<?=$product['image_url']?>"width="200px"/></td>
+                                    <td><img src="../<?=$product['image_url']?>" height="150" width="150px"/></td>
                                     <td><?= $product['category_id'] ?></td>
                                     <td><?= $product['price'] ?></td>
                                     <td><?= $product['discount']*100 ?>%</td>
