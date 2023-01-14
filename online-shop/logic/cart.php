@@ -17,6 +17,7 @@ function addProductToCart($product)
         array_push($cart, ['product' => $product, 'quantity' => 1]);
     }
     $_SESSION['cart'] = $cart;
+    
 }
 
 function getCart()
@@ -29,40 +30,34 @@ function getCart()
 }
 function decQun($product)
 {
-    $cart = getCart();
+    if (session_status() === PHP_SESSION_NONE)
+        session_start();
+
+    $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
     for ($i = 0; $i < count($cart); $i++) {
         if ($cart[$i]['product']['id'] === $product['id'] && $cart[$i]['quantity'] > 1) {
-            $cart[$i]['quantity']--;
+            $cart[$i]['quantity'] -= 1;
         }
-        else if($cart[$i]['product']['id'] === $product['id'] && $cart[$i]['quantity'] = 1){
-            unset($cart[$i]);
+        else if ($cart[$i]['product']['id'] === $product['id'] && $cart[$i]['quantity'] == 1)
+        {
+            array_splice($cart, $i, 1);
         }
 
-        
     }
     $_SESSION['cart'] = $cart;
+
 }
 function deleteItem($product)
 {
-    $cart = getCart();
+    if (session_status() === PHP_SESSION_NONE)
+        session_start();
+
+    $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
     for ($i = 0; $i < count($cart); $i++) {
         if ($cart[$i]['product']['id'] === $product['id']) {
-            unset($cart[$i]);
+            array_splice($cart, $i, 1);
         }
     }
     $_SESSION['cart'] = $cart;
-}
-
-function incQun($product)
-{
-    $cart = getCart();
-    for ($i = 0; $i < count($cart); $i++) {
-        if ($cart[$i]['product']['id'] === $product['id']) {
-            $cart[$i]['quantity']++;
-        }
-      
-
-        
-    }
-    $_SESSION['cart'] = $cart;
+    
 }

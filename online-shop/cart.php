@@ -4,8 +4,8 @@ require_once('./logic/cart.php');
 $products = getCart();
 ?>
 <?php
+var_export($products);
 require_once('./layouts/header.php');
-
  ?>
   <!-- Breadcrumb Start -->
     <div class="container-fluid">
