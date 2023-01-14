@@ -109,16 +109,19 @@ require_once('./layouts/header.php');
             <div class="border-bottom pb-2">
               <div class="d-flex justify-content-between mb-3">
                 <h6>Subtotal</h6>
+                <h6><?=getSubTotal() ?></h6>
                 <h6 id="sub-total"></h6>
               </div>
               <div class="d-flex justify-content-between">
                 <h6 class="font-weight-medium">Shipping</h6>
+                <h6 class="font-weight-medium"><?=getShipping() ?></h6> 
                 <h6 class="font-weight-medium" id="shipping"></h6>
               </div>
             </div>
             <div class="pt-2">
               <div class="d-flex justify-content-between mt-2">
                 <h5>Total</h5>
+                <h5><?=getTotal() ?></h5>
                 <h5 id="total"></h5>
               </div>
               <button

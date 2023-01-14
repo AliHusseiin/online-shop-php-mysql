@@ -61,3 +61,32 @@ function deleteItem($product)
     $_SESSION['cart'] = $cart;
     
 }
+function getSubTotal()
+{
+    if (session_status() === PHP_SESSION_NONE)
+        session_start();
+
+    $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+    $subtotal = 0;
+    for ($i = 0; $i < count($cart); $i++) {
+        $subtotal += $cart[$i]['product']['price'] * $cart[$i]['quantity'];
+    }
+    return $subtotal;
+}
+function getShipping()
+{
+    if (session_status() === PHP_SESSION_NONE)
+        session_start();
+
+    $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+    $shipping = 0;
+    for ($i = 0; $i < count($cart); $i++) {
+        $shipping += $cart[$i]['quantity'] * 5;
+    }
+    return $shipping;
+}
+function getTotal(){
+    return getSubTotal() + getShipping();
+}
+
+
